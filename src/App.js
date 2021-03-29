@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Search from './components/table/search';
 import UsersTable from './components/table/users-table';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
 
   return (
     <div className="App">
-      <Search />
       <UsersTable users={users} />
     </div>
   );
