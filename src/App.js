@@ -1,5 +1,10 @@
+// Css for Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Search from './components/table/search';
+import UsersTable from './components/table/users-table';
 
 function App() {
   const [users, setUsers] = useState({});
@@ -12,11 +17,12 @@ function App() {
     }
 
     fetchData();
-  });
+  }, []);
 
   return (
     <div className="App">
-      <h1> test </h1>
+      <Search />
+      <UsersTable users={users} />
     </div>
   );
 }
