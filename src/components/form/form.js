@@ -1,8 +1,8 @@
 import { Modal, Button } from 'react-bootstrap';
-import ReusibleForm from './reusable/form'
+import ReusibleForm      from './reusable/form';
 
 // upperCase here because react-hook-from library
-//doesn't accept it with the first letter in lowercase
+// doesn't accept it with the first letter in lowercase
 const EditForm = (props) => {
     const userToEdit = props.user;
 
@@ -56,16 +56,15 @@ const EditForm = (props) => {
                    { template.title}
                 </Modal.Title>
             </Modal.Header>
+
             <Modal.Body>
-
-            <ReusibleForm
-                template={ template }
-            />
-
+                <ReusibleForm
+                    template={ template }
+                />
             </Modal.Body>
 
             <Modal.Footer>
-                <Button >Close</Button>
+                <Button variant="outline-primary"> Close </Button>
             </Modal.Footer>
         </Modal>
     );

@@ -1,15 +1,18 @@
 import { Table, Form, Button } from 'react-bootstrap';
-import { useState } from 'react';
-import FormModal from '../form/form';
+import { useState }            from 'react';
+import FormModal               from '../form/form';
 
 const UsersTable = (props) => {
     const users                           = props.users;
     const [filter, setFilter]             = useState('');
     const [displayModal, setDisplayModal] = useState(false);
     const [userToEdit, setUserToEdit]     = useState({})
-    
-    
-    const items  = Object.values(users).filter((user) => {
+
+    const handleModalDisplay = (value) => {
+        setDisplayModal(value);
+    }
+
+    const items = Object.values(users).filter((user) => {
         if ('' === filter) {
             return user;
         } else if(
@@ -22,6 +25,9 @@ const UsersTable = (props) => {
         ) {
             return user;
         }
+
+        // to always have a return to avoid some weird cases
+        return '';
     }).map(user => {
         return (
             <tr key={ user.id }>
@@ -43,13 +49,18 @@ const UsersTable = (props) => {
 
     return (
         <div className="container">
-            <div className="container">
-                <Form.Control value={ filter } onChange={ e => setFilter( e.target.value) } size="xl" type="text" placeholder="Search for an User here..." />
+            <div className="search-bar">
+                <Form.Control value={ filter }
+                    onChange={ e => setFilter( e.target.value) }
+                    size="xl"
+                    type="text"
+                    placeholder="Search for an User here..."
+                />
             </div>
 
             <FormModal
                 show={ displayModal }
-                onHide={() => setDisplayModal(false) }
+                onHide={ () => handleModalDisplay(false) }
                 user={ userToEdit }
             />
 

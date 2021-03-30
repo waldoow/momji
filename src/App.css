@@ -1,5 +1,13 @@
+
+html {
+  margin: 0px;
+  padding: 0px;
+}
 .App {
   text-align: center;
+
+  background-color: #ccc5b9;
+  height: 100%;
 }
 
 .App-logo {
@@ -11,6 +19,10 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.search-bar {
+  margin: 1em;
 }
 
 .App-header {

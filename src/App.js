@@ -1,6 +1,9 @@
 // Css for Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Custom CSS
+import './App.css';
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UsersTable from './components/table/users-table';
