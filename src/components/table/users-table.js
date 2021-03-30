@@ -1,9 +1,13 @@
-import { Table, Form } from 'react-bootstrap';
+import { Table, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
+import FormModal from '../form/form';
 
 const UsersTable = (props) => {
-    const users               = props.users;
-    const [filter, setFilter] = useState('');
+    const users                           = props.users;
+    const [filter, setFilter]             = useState('');
+    const [displayModal, setDisplayModal] = useState(false);
+    const [userToEdit, setUserToEdit]     = useState({})
+    
     
     const items  = Object.values(users).filter((user) => {
         if ('' === filter) {
@@ -18,25 +22,36 @@ const UsersTable = (props) => {
         ) {
             return user;
         }
-    }).map(key => {
-            return (
-                <tr key={ key.id }>
-                    <td>{ key.profile.firstName }</td>
-                    <td>{ key.profile.lastName }</td>
-                    <td>{ key.email }</td>
-                    <td>{ key.address }</td>
-                    <td>{ new Date(key.registered).toLocaleDateString('fr-FR') }</td>
-                    <td>{ key.isActive.toString() }</td>
-                </tr> 
-            )
-        })
-    ;
+    }).map(user => {
+        return (
+            <tr key={ user.id }>
+                <td>{ user.profile.firstName }</td>
+                <td>{ user.profile.lastName }</td>
+                <td>{ user.email }</td>
+                <td>{ user.address }</td>
+                <td>{ new Date(user.registered).toLocaleDateString('fr-FR') }</td>
+                <td>{ user.isActive.toString() }</td>
+                <td>
+                    <Button onClick={() => {
+                        setDisplayModal(true);
+                        setUserToEdit(user);
+                    }} variant="secondary">Edit</Button>
+                </td>
+            </tr> 
+        )
+    });
 
     return (
         <div className="container">
             <div className="container">
                 <Form.Control value={ filter } onChange={ e => setFilter( e.target.value) } size="xl" type="text" placeholder="Search for an User here..." />
             </div>
+
+            <FormModal
+                show={ displayModal }
+                onHide={() => setDisplayModal(false) }
+                user={ userToEdit }
+            />
 
             <Table striped bordered hover variant="dark">
                 <thead>
@@ -47,6 +62,7 @@ const UsersTable = (props) => {
                         <th>Address</th>
                         <th>Registered</th>
                         <th>Status</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
